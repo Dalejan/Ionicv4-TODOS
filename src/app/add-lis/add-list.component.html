@@ -1,0 +1,41 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button (click)="goBack()"></ion-back-button>
+        </ion-buttons>
+        <ion-title>
+            Create Task
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-list-header>
+        {{list.title}}
+    </ion-list-header>
+    <!-- Fixed Floating Action Button that does not scroll with the content -->
+    <ion-list>
+        <ion-item>
+            <ion-label position="floating">New item</ion-label>
+            <ion-input [(ngModel)]="itemName" (keyup.enter)="addItem()"></ion-input>
+        </ion-item>
+
+    </ion-list>
+
+    <ion-list>
+        <ion-item-sliding *ngFor="let item of list.items; let i = index" class="animated fadeInDown">
+
+            <ion-item (click)="updateTask(item)">
+                <ion-icon *ngIf="!item.finished" name="square-outline"></ion-icon>
+                <ion-icon *ngIf="item.finished" name="checkbox-outline"></ion-icon>
+                {{item.desc}}
+            </ion-item>
+            <ion-item-options side="start">
+                <ion-button color="danger" (click)="deleteItem(i)" >
+                    <ion-icon name="close"></ion-icon>
+                </ion-button>
+            </ion-item-options>
+        </ion-item-sliding>
+    </ion-list>
+
+</ion-content>
